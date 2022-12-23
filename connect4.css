@@ -61,7 +61,8 @@ body {
 }
 
 .nodisplay {
-  display: none;
+  opacity: 0%;
+  pointer-events: none;
 }
 .endgame {
   display: flex;
@@ -73,7 +74,18 @@ body {
   left: 1px;
   top: 1px;
   bottom: 1px;
-  background-color: rgba(0, 0, 0, 0.389);
+  background-color: rgba(30, 30, 30, 0.532);
   margin: 0 auto;
   width: 100vh;
+  transition: all ease-out 1s;
+}
+.RED-win {
+  color: red;
+}
+.YELLOW-win {
+  color: gold;
+}
+
+#reset-button {
+  margin-top: 30px;
 }

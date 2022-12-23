@@ -7,16 +7,13 @@
 
 let WIDTH = 7;
 let HEIGHT = 6;
+let currPlayer;
+let board = [];
 
-let currPlayer = Math.floor(Math.random() * 2) + 1;
-//chooses which player starts first randomly
+/** startingPlayer: chooses which player starts first randomly */
 const startingPlayer = () => (currPlayer = Math.floor(Math.random() * 2) + 1);
 
-let board = []; // array of rows, each row is array of cells  (board[y][x])
-
-/** makeBoard: create in-JS board structure:
- */
-
+/** makeBoard: create in-JS board structure: */
 const makeBoard = () => {
   for (let i = 0; i < HEIGHT; i++) {
     board.push(Array.from({ length: WIDTH }));
@@ -24,11 +21,9 @@ const makeBoard = () => {
 };
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 const makeHtmlBoard = () => {
   const htmlBoard = document.getElementById("board");
-
-  // TODO: add comment for this code
+  // creates top row for selecting a column to place the piece in
   const top = document.createElement("tr");
   top.classList.add(`player${currPlayer}hover`);
   top.setAttribute("id", "column-top");
@@ -40,8 +35,7 @@ const makeHtmlBoard = () => {
     top.append(headCell);
   }
   htmlBoard.append(top);
-
-  // TODO: add comment for this code
+  // creates the empty spaces for the game board
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
@@ -54,7 +48,6 @@ const makeHtmlBoard = () => {
 };
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
 function findSpotForCol(x) {
   for (let y = HEIGHT - 1; y >= 0; y--) {
     if (!board[y][x]) {
@@ -65,7 +58,6 @@ function findSpotForCol(x) {
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
-
 const placeInTable = (y, x) => {
   const piece = document.createElement("div");
   piece.classList.add("piece", "grow");
@@ -76,16 +68,21 @@ const placeInTable = (y, x) => {
 };
 
 /** endGame: announce game end */
-
 const endGame = (winner) => {
+  let winnerColor;
+  winner === 1 ? (winnerColor = "RED") : (winnerColor = "YELLOW");
+  const winnerText = document.getElementById("winner-color-text");
   const top = document.querySelector("tr");
   const winnerWindow = document.querySelector("#winner");
   top.removeEventListener("click", handleClick);
-  winnerWindow.classList.add("endgame");
+  setTimeout(() => {
+    winnerWindow.classList.remove("nodisplay");
+    winnerText.classList.add(`${winnerColor}-win`);
+    winnerText.innerText = winnerColor;
+  }, 500);
 };
 
 /** switchHoverColor: swaps the color of the top row based on current player */
-
 const switchHoverColor = (player) => {
   const top = document.querySelector("tr");
   player === 1
@@ -95,72 +92,63 @@ const switchHoverColor = (player) => {
 };
 
 /** handleClick: handle click of column top to play piece */
-
 const handleClick = (evt) => {
   // get x from ID of clicked cell
   const x = +evt.target.id;
-
   // get next spot in column (if none, ignore click)
   const y = findSpotForCol(x);
   if (y === null) {
     return;
   }
-
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   board[y][x] = currPlayer;
+  console.log(board);
+  console.log(board[y][x]);
   placeInTable(y, x);
-
   // check for win
   if (checkForWin()) {
     return endGame(currPlayer);
   }
-
-  // check for tie
+  //if board[y][x].includes('null')// check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
   currPlayer == 1 ? (currPlayer = 2) : (currPlayer = 1);
   switchHoverColor(currPlayer);
 };
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
-
 const _win = (cells) =>
   // Check four cells to see if they're all color of current player
   //  - cells: list of four (y, x) cells
   //  - returns true if all are legal coordinates & all match currPlayer
-
   cells.every(
     ([y, x]) =>
       y >= 0 && y < HEIGHT && x >= 0 && x < WIDTH && board[y][x] === currPlayer
   );
 
-function checkForWin() {
-  // TODO: read and understand this code. Add comments to help you.
-
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [
+const checkForWin = () => {
+  for (let y = 0; y < HEIGHT; y++) {
+    for (let x = 0; x < WIDTH; x++) {
+      const horiz = [
         [y, x],
         [y, x + 1],
         [y, x + 2],
         [y, x + 3],
       ];
-      var vert = [
+      const vert = [
         [y, x],
         [y + 1, x],
         [y + 2, x],
         [y + 3, x],
       ];
-      var diagDR = [
+      const diagDR = [
         [y, x],
         [y + 1, x + 1],
         [y + 2, x + 2],
         [y + 3, x + 3],
       ];
-      var diagDL = [
+      const diagDL = [
         [y, x],
         [y + 1, x - 1],
         [y + 2, x - 2],
@@ -172,7 +160,10 @@ function checkForWin() {
       }
     }
   }
-}
+};
 
+const clearGame = () => {};
+
+startingPlayer();
 makeBoard();
 makeHtmlBoard();
