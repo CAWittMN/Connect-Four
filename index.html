@@ -8,16 +8,16 @@
     <title>Classic Connect 4</title>
   </head>
   <body>
-    <div id="game-hud">
-      <div id="current-player"><span id="current-player-text"></span></div>
-      <div id="winner">
-        <h1><span id="winner-color-text"></span>WINS!</h1>
-      </div>
-    </div>
+    <h1>Connect 4</h1>
+    <div id="current-player"><span id="current-player-text"></span></div>
     <div id="game">
       <table id="board"></table>
     </div>
     <button id="reset-button"><span id="button-text">RESET</span></button>
+    <div id="winner" class="nodisplay">
+      <h1><span id="winner-color-text"></span>WINS!</h1>
+      <button id="new-game">NEW GAME</button>
+    </div>
 
     <script src="connect4.js"></script>
   </body>
