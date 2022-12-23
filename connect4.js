@@ -8,13 +8,14 @@
 let WIDTH = 7;
 let HEIGHT = 6;
 let currPlayer;
-let board = [];
+let board;
 
 /** startingPlayer: chooses which player starts first randomly */
 const startingPlayer = () => (currPlayer = Math.floor(Math.random() * 2) + 1);
 
 /** makeBoard: create in-JS board structure: */
 const makeBoard = () => {
+  board = [];
   for (let i = 0; i < HEIGHT; i++) {
     board.push(Array.from({ length: WIDTH }));
   }
@@ -68,7 +69,7 @@ const placeInTable = (y, x) => {
 };
 
 /** endGame: announce game end */
-const endGame = (winner) => {
+const endGame = (winner, tie) => {
   let winnerColor;
   winner === 1 ? (winnerColor = "RED") : (winnerColor = "YELLOW");
   const winnerText = document.getElementById("winner-color-text");
@@ -77,9 +78,16 @@ const endGame = (winner) => {
   top.removeEventListener("click", handleClick);
   setTimeout(() => {
     winnerWindow.classList.remove("nodisplay");
-    winnerText.classList.add(`${winnerColor}-win`);
-    winnerText.innerText = winnerColor;
+    if (tie === 0) {
+      winnerText.innerText = winnerColor;
+      winnerText.classList.add(`${winnerColor}-win`);
+    } else if (tie === 1) {
+      winnerText.innerText = "NOBODY";
+    }
   }, 500);
+};
+const tieGame = () => {
+  document.getElementById("winnder-color-text").innerText = "NOBODY";
 };
 
 /** switchHoverColor: swaps the color of the top row based on current player */
@@ -102,16 +110,14 @@ const handleClick = (evt) => {
   }
   // place piece in board and add to HTML table
   board[y][x] = currPlayer;
-  console.log(board);
-  console.log(board[y][x]);
   placeInTable(y, x);
   // check for win
   if (checkForWin()) {
-    return endGame(currPlayer);
+    return endGame(currPlayer, 0);
   }
-  //if board[y][x].includes('null')// check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
-
+  if (board.every((row) => row.every((cell) => cell))) {
+    return endGame(currPlayer, 1);
+  }
   // switch players
   currPlayer == 1 ? (currPlayer = 2) : (currPlayer = 1);
   switchHoverColor(currPlayer);
@@ -162,7 +168,22 @@ const checkForWin = () => {
   }
 };
 
-const clearGame = () => {};
+const clearGame = () => {
+  const htmlBoard = document.getElementById("board");
+  while (htmlBoard.firstChild) {
+    htmlBoard.removeChild(htmlBoard.firstChild);
+  }
+  document.querySelector("#winner").classList.add("nodisplay");
+  startingPlayer();
+  makeBoard();
+  makeHtmlBoard();
+};
+document
+  .getElementById("reset-button")
+  .addEventListener("click", () => clearGame());
+document
+  .getElementById("new-game")
+  .addEventListener("click", () => clearGame());
 
 startingPlayer();
 makeBoard();
