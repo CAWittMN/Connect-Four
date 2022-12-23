@@ -1,15 +1,24 @@
-<!doctype html>
-<head>
-  <title>Connect 4</title>
-  <link href="connect4.css" rel="stylesheet">
-</head>
-<body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="connect4.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Classic Connect 4</title>
+  </head>
+  <body>
+    <div id="game-hud">
+      <div id="current-player"><span id="current-player-text"></span></div>
+      <div id="winner">
+        <h1><span id="winner-color-text"></span>WINS!</h1>
+      </div>
+    </div>
+    <div id="game">
+      <table id="board"></table>
+    </div>
+    <button id="reset-button"><span id="button-text">RESET</span></button>
 
-<div id="game">
-  <table id="board"></table>
-</div>
-
-<script src="connect4.js"></script>
-
-</body>
+    <script src="connect4.js"></script>
+  </body>
 </html>
