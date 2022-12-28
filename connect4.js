@@ -9,9 +9,15 @@ let WIDTH = 7;
 let HEIGHT = 6;
 let currPlayer;
 let board;
+const playerDot = document.getElementById("player-dot");
 
 /** startingPlayer: chooses which player starts first randomly */
-const startingPlayer = () => (currPlayer = Math.floor(Math.random() * 2) + 1);
+const startingPlayer = () => {
+  currPlayer = Math.floor(Math.random() * 2) + 1;
+  playerDot.classList.remove("player1");
+  playerDot.classList.remove("player2");
+  playerDot.classList.add(`player${currPlayer}`);
+};
 
 /** makeBoard: create in-JS board structure: */
 const makeBoard = () => {
@@ -75,12 +81,14 @@ const endGame = (winner, tie) => {
   const winnerText = document.getElementById("winner-color-text");
   const top = document.querySelector("tr");
   const winnerWindow = document.querySelector("#winner");
+  winnerText.classList.remove("RED");
+  winnerText.classList.remove("YELLOW");
   top.removeEventListener("click", handleClick);
   setTimeout(() => {
     winnerWindow.classList.remove("nodisplay");
     if (tie === 0) {
       winnerText.innerText = winnerColor;
-      winnerText.classList.add(`${winnerColor}-win`);
+      winnerText.classList.add(`${winnerColor}`);
     } else if (tie === 1) {
       winnerText.innerText = "NOBODY";
     }
@@ -91,11 +99,13 @@ const tieGame = () => {
 };
 
 /** switchHoverColor: swaps the color of the top row based on current player */
-const switchHoverColor = (player) => {
+const switchHoverColor = () => {
   const top = document.querySelector("tr");
-  player === 1
-    ? top.classList.toggle("player2hover")
-    : top.classList.toggle("player1hover");
+  playerDot.classList.remove("player1");
+  playerDot.classList.remove("player2");
+  playerDot.classList.add(`player${currPlayer}`);
+  top.classList.remove("player2hover");
+  top.classList.remove("player1hover");
   top.classList.add(`player${currPlayer}hover`);
 };
 
@@ -120,7 +130,7 @@ const handleClick = (evt) => {
   }
   // switch players
   currPlayer == 1 ? (currPlayer = 2) : (currPlayer = 1);
-  switchHoverColor(currPlayer);
+  switchHoverColor();
 };
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
@@ -178,6 +188,10 @@ const clearGame = () => {
   makeBoard();
   makeHtmlBoard();
 };
+document.getElementById("rules-toggle").addEventListener("click", () => {
+  const arrow = document.getElementById("arrow");
+  arrow.classList.toggle("arrow-down");
+});
 document
   .getElementById("reset-button")
   .addEventListener("click", () => clearGame());
