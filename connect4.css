@@ -1,6 +1,6 @@
 body {
   padding-top: 30px;
-  font-family: "Comfortaa", cursive;
+  font-family: "Raleway", sans-serif;
   background-color: rgb(38, 39, 47);
   color: white;
   text-align: center;
@@ -51,7 +51,7 @@ body {
   cursor: crosshair;
   border: dashed 1px lightgray;
   transition: all ease-in 0.2s;
-  background-color: rgb(66, 68, 83);
+  background-color: rgb(50, 52, 71);
 }
 
 #column-top.player1hover td:hover {
@@ -78,7 +78,7 @@ body {
   left: 1px;
   top: 1px;
   bottom: 1px;
-  background-color: rgba(30, 30, 30, 0.532);
+  background-color: rgba(30, 30, 30, 0.672);
   margin: 0 auto;
   width: 100vh;
   transition: all ease-out 1s;
@@ -94,9 +94,10 @@ button {
   cursor: pointer;
   margin-top: 30px;
   border: none;
-  font-family: "Times New Roman", Times, serif;
-  background-color: aquamarine;
+  background-color: rgb(197, 221, 213);
   box-shadow: 0 5px #666;
+  border-radius: 50%;
+  padding: 10px;
 }
 
 button:active {
@@ -121,6 +122,20 @@ button:active {
 
 #game-box {
   flex: 1;
+}
+
+#rules-toggle {
+  cursor: pointer;
+}
+
+#arrow {
+  writing-mode: vertical-lr;
+  transition: all ease-in-out 0.5s;
+}
+
+.arrow-down {
+  transform: rotate(90deg);
+  transition: all ease-in-out 0.5s;
 }
 
 #rules-text {

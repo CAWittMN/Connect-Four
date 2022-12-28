@@ -188,9 +188,10 @@ const clearGame = () => {
   makeBoard();
   makeHtmlBoard();
 };
+
 document.getElementById("rules-toggle").addEventListener("click", () => {
-  const arrow = document.getElementById("arrow");
-  arrow.classList.toggle("arrow-down");
+  document.getElementById("arrow").classList.toggle("arrow-down");
+  document.getElementById("rules-text").classList.toggle("nodisplay");
 });
 document
   .getElementById("reset-button")
