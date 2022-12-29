@@ -141,6 +141,8 @@ button:active {
 #rules-text {
   margin: auto;
   width: 200px;
+  text-align: justify;
+  line-height: 2;
 }
 
 #player-dot {

@@ -43,9 +43,9 @@ const makeHtmlBoard = () => {
   }
   htmlBoard.append(top);
   // creates the empty spaces for the game board
-  for (var y = 0; y < HEIGHT; y++) {
+  for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
-    for (var x = 0; x < WIDTH; x++) {
+    for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
       row.append(cell);
@@ -55,14 +55,14 @@ const makeHtmlBoard = () => {
 };
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-function findSpotForCol(x) {
+const findSpotForCol = (x) => {
   for (let y = HEIGHT - 1; y >= 0; y--) {
     if (!board[y][x]) {
       return y;
     }
   }
   return null;
-}
+};
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 const placeInTable = (y, x) => {
