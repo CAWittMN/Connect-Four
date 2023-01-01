@@ -4,6 +4,53 @@
  * column until a player gets four-in-a-row (horiz, vert, or diag) or until
  * board fills (tie)
  */
+class Game {
+  constructor() {
+    this.board = [];
+    this.players = [1, 2];
+    this.WIDTH = 7;
+    this.HEIGHT = 6;
+    this.currPlayer;
+    this.makeBoard();
+    this.makeHtmlBoard();
+  }
+  makeBoard() {
+    for (let i = 0; i < this.HEIGHT; i++) {
+      this.board.push(Array.from({ length: this.WIDTH }));
+    }
+  }
+  makeHtmlBoard() {
+    const htmlBoard = document.getElementById("board");
+    // creates top row for selecting a column to place the piece in
+    const top = document.createElement("tr");
+    top.classList.add(`player${this.currPlayer}hover`);
+    top.setAttribute("id", "column-top");
+    top.addEventListener("click", this.handleClick);
+
+    for (let x = 0; x < this.WIDTH; x++) {
+      const headCell = document.createElement("td");
+      headCell.setAttribute("id", x);
+      top.append(headCell);
+    }
+    htmlBoard.append(top);
+    // creates the empty spaces for the game board
+    for (let y = 0; y < this.HEIGHT; y++) {
+      const row = document.createElement("tr");
+      for (let x = 0; x < this.WIDTH; x++) {
+        const cell = document.createElement("td");
+        cell.setAttribute("id", `${y}-${x}`);
+        row.append(cell);
+      }
+      htmlBoard.append(row);
+    }
+  }
+  startingPlayer() {
+    this.currPlayer = Math.floor(Math.random() * 2) + 1;
+    playerDot.classList.remove("player1");
+    playerDot.classList.remove("player2");
+    playerDot.classList.add(`player${currPlayer}`);
+  }
+}
 
 let WIDTH = 7;
 let HEIGHT = 6;
@@ -19,15 +66,16 @@ const startingPlayer = () => {
   playerDot.classList.add(`player${currPlayer}`);
 };
 
-/** makeBoard: create in-JS board structure: */
+/** makeBoard: create in-JS board structure: MOVED TO OBJECT 
 const makeBoard = () => {
   board = [];
   for (let i = 0; i < HEIGHT; i++) {
     board.push(Array.from({ length: WIDTH }));
   }
 };
+*/
 
-/** makeHtmlBoard: make HTML table and row of column tops. */
+/** makeHtmlBoard: make HTML table and row of column tops. 
 const makeHtmlBoard = () => {
   const htmlBoard = document.getElementById("board");
   // creates top row for selecting a column to place the piece in
@@ -53,6 +101,7 @@ const makeHtmlBoard = () => {
     htmlBoard.append(row);
   }
 };
+*/
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 const findSpotForCol = (x) => {
@@ -201,5 +250,6 @@ document
   .addEventListener("click", () => clearGame());
 
 startingPlayer();
-makeBoard();
-makeHtmlBoard();
+new Game();
+//makeBoard();
+//makeHtmlBoard();
