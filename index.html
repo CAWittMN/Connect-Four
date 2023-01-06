@@ -15,9 +15,17 @@
   </head>
   <body>
     <h1>Connect 4</h1>
+    <div id="new-game-inputs">
+      <input id="player1" placeholder="PLAYER 1" type="text" /><input
+        id="player2"
+        placeholder="PLAYER 2"
+        type="text"
+      />
+      <button>New Game</button>
+    </div>
     <div id="game">
       <div id="current-player">
-        <h3>Current Player:</h3>
+        <h3 id="player-text"></h3>
         <div id="player-dot"></div>
       </div>
       <div id="game-box">

@@ -92,12 +92,13 @@ body {
 
 button {
   cursor: pointer;
-  margin-top: 30px;
+  margin: 10px auto;
   border: none;
   background-color: rgb(197, 221, 213);
   box-shadow: 0 5px #666;
   border-radius: 50%;
   padding: 10px;
+  display: block;
 }
 
 button:active {
@@ -150,4 +151,13 @@ button:active {
   height: 50px;
   border-radius: 50%;
   margin: auto;
+}
+
+input {
+  margin: auto 10px;
+  border: none;
+  background-color: darkgray;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
 }
