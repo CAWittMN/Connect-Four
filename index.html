@@ -16,24 +16,21 @@
   <body>
     <h1>Connect 4</h1>
     <div id="new-game-inputs">
-      <input id="player1" placeholder="PLAYER 1" type="text" /><input
-        id="player2"
-        placeholder="PLAYER 2"
-        type="text"
-      />
-      <button>New Game</button>
+      <input id="player1" required placeholder="PLAYER 1" type="text" />
+      <input required id="player2" placeholder="PLAYER 2" type="text" />
+      <button id="start-button">Start</button>
+      <h4 id="start-instructions">Enter your names and click start!</h4>
     </div>
     <div id="game">
-      <div id="current-player">
-        <h3 id="player-text"></h3>
+      <div class="no-display" id="current-player">
+        <h3 id="player-text">Current Player</h3>
         <div id="player-dot"></div>
+        <h4 id="current-player-name"></h4>
       </div>
-      <div id="game-box">
-        <table id="board"></table>
-      </div>
+      <div id="game-box"></div>
       <div id="rules">
         <h3 id="rules-toggle">Rules <span id="arrow">∧</span></h3>
-        <p id="rules-text" class="nodisplay">
+        <p id="rules-text" class="no-display">
           Two players pick either <span class="RED">RED</span> or
           <span class="YELLOW">YELLOW</span>. Players take turns choosing a
           column to drop their piece into. The goal is to align 4 pieces with no
@@ -41,9 +38,8 @@
         </p>
       </div>
     </div>
-    <button id="reset-button">RESET</button>
-    <div id="winner" class="nodisplay endgame">
-      <h1><span id="winner-color-text"></span> WINS!</h1>
+    <div id="winner" class="no-display endgame">
+      <h1><span id="winner-name"></span> wins!</h1>
       <button id="new-game">NEW GAME</button>
     </div>
     <script src="connect4.js"></script>

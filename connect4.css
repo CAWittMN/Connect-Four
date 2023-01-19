@@ -5,6 +5,12 @@ body {
   color: white;
   text-align: center;
   user-select: none;
+  max-width: 1000px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 50px;
 }
 /* game board table */
 #board {
@@ -64,9 +70,10 @@ body {
   background-color: gold;
 }
 
-.nodisplay {
+.no-display {
   opacity: 0%;
   pointer-events: none;
+  position: absolute;
 }
 .endgame {
   display: flex;
@@ -81,7 +88,7 @@ body {
   background-color: rgba(30, 30, 30, 0.672);
   margin: 0 auto;
   width: 100vh;
-  transition: all ease-out 1s;
+  transition: ease-out 0.5s;
 }
 .RED {
   color: red;
@@ -117,16 +124,26 @@ button:active {
   flex: 1;
 }
 
+#player-text {
+  margin-top: 0;
+}
+
 #rules {
   flex: 1;
 }
 
 #game-box {
   flex: 1;
+  margin-top: 10px;
 }
 
 #rules-toggle {
   cursor: pointer;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 100px;
+  margin: auto;
+  margin-bottom: 5px;
 }
 
 #arrow {
@@ -154,10 +171,24 @@ button:active {
 }
 
 input {
+  font-weight: bolder;
+  text-align: center;
   margin: auto 10px;
   border: none;
-  background-color: darkgray;
-  color: white;
   padding: 5px;
   border-radius: 10px;
+}
+
+#player1 {
+  color: rgb(141, 6, 6);
+  background-color: red;
+}
+
+#player2 {
+  color: rgb(143, 123, 9);
+  background-color: gold;
+}
+
+::placeholder {
+  color: rgb(151, 150, 150);
 }
