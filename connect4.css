@@ -12,7 +12,7 @@ body {
 h1 {
   font-size: 50px;
 }
-/* game board table */
+
 #board {
   min-width: 400px;
   max-width: 400px;
@@ -31,10 +31,10 @@ h1 {
   background-color: rgb(79, 81, 98);
 }
 
-/* pieces are div within game table cells: draw as colored circles */
 .grow {
   transform: scale(0);
 }
+
 .piece {
   margin: 5px;
   width: 80%;
@@ -50,8 +50,6 @@ h1 {
 .player2 {
   background-color: gold;
 }
-
-/* column-top is table row of clickable areas for each column */
 
 #column-top td {
   cursor: crosshair;
@@ -75,6 +73,7 @@ h1 {
   pointer-events: none;
   position: absolute;
 }
+
 .endgame {
   display: flex;
   flex-direction: column;
@@ -90,6 +89,7 @@ h1 {
   width: 100vh;
   transition: ease-out 0.5s;
 }
+
 .RED {
   color: red;
 }

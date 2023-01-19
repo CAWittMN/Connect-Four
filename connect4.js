@@ -1,9 +1,3 @@
-/** Connect Four
- *
- * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
- * column until a player gets four-in-a-row (horiz, vert, or diag) or until
- * board fills (tie)
- */
 class Game {
   constructor() {
     this.board = [];
@@ -78,9 +72,11 @@ class Game {
     const playerDot = document.getElementById("player-dot");
     document.getElementById("current-player-name").innerText =
       this.players[this.currPlayer - 1];
+
     playerDot.classList.remove("player1");
     playerDot.classList.remove("player2");
     playerDot.classList.add(`player${this.currPlayer}`);
+
     top.classList.remove("player2hover");
     top.classList.remove("player1hover");
     top.classList.add(`player${this.currPlayer}hover`);
@@ -120,6 +116,7 @@ class Game {
     const piece = document.createElement("div");
     piece.classList.add("piece", "grow");
     piece.classList.add(`player${this.currPlayer}`);
+
     const openSpot = document.getElementById(`${y}-${x}`);
     openSpot.append(piece);
     setTimeout(() => piece.classList.remove("grow"), 1);
@@ -176,7 +173,6 @@ class Game {
   }
 
   updateWinnerText(winner, tie) {
-    console.log(winner);
     const winnerText = document.getElementById("winner-name");
     winnerText.classList.remove("RED");
     winnerText.classList.remove("YELLOW");
@@ -205,12 +201,6 @@ class Game {
       winnerWindow.classList.remove("no-display");
     }, 500);
   }
-  /*clearGame() {
-    const htmlBoard = document.getElementById("game-box");
-    htmlBoard.removeChild(htmlBoard.firstChild);
-    document.querySelector("#winner").classList.add("no-display");
-    new Game();
-  }*/
 }
 
 document.getElementById("rules-toggle").addEventListener("click", () => {
